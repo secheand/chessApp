@@ -5,9 +5,52 @@
 //  Created by Sebastian Fabian Echeandia Reynes on 23/03/23.
 //
 
-#include "guiBoard.hpp"
+#include <guiBoard.hpp>
 
-gui::chessPiece::chessPiece(std::pair<int, int> position, gui::pieceType pieceType)
+void gui::ChessBoard::initChessBoard()
+{
+    window.create(sf::VideoMode(1168, 1168), "Chess");
+}
+
+void gui::ChessBoard::setupBoardForWhite()
+{
+    boardTexture.loadFromFile("assets/whiteBoard.png");
+    boardSprite.setTexture(boardTexture);
+    boardSprite.setPosition(0, 0);
+}
+
+void gui::ChessBoard::checkForEvent()
+{
+    while (window.pollEvent(event))
+    {
+        // Check if user closed window
+        if (event.type == sf::Event::Closed)
+        {
+            window.close();
+        }
+
+        // Check if the user pressed scape to close window
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+        {
+            window.close();
+        }
+    }
+}
+
+void gui::ChessBoard::renderBoard()
+{
+    window.draw(boardSprite);
+    
+    // Update the window
+    window.display();
+}
+
+bool gui::ChessBoard::isWindowOpen()
+{
+    return window.isOpen();
+}
+
+/*gui::chessPiece::chessPiece(std::pair<int, int> position, gui::pieceType pieceType)
 {
     _position = position;
     _pieceType = pieceType;
@@ -25,7 +68,7 @@ bool gui::setupBoard(std::vector<gui::chessPiece> & whitePieces,
                 std::vector<gui::chessPiece> & blackPieces,
                 gui::chessBoard & chessBoard)
 {
-        /*std::vector<std::string> whitePiecesFileNames {"assets/whitePawn.png",
+        std::vector<std::string> whitePiecesFileNames {"assets/whitePawn.png",
         "assets/whiteRook.png",
         "assets/whiteKnight.png",
         "assets/whiteBishop.png",
@@ -147,7 +190,7 @@ bool gui::setupBoard(std::vector<gui::chessPiece> & whitePieces,
 	chessBoard.sprite.setTexture(chessBoard.texture);
 	chessBoard.sprite.setPosition(0, 0);
 	chessBoard.sprite.setScale(1.69, 1.69);
-	*/
+	
 	return true;
     
-}
+}*/

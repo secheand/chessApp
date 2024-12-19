@@ -17,47 +17,37 @@ namespace gui
 {
     enum pieceType
     {
-        pawn = 1,
-        rook = 2,
-        knight = 3,
-        bishop = 4,
-        queen = 5,
-        king = 6
+        whitePawn = 1,
+        whiteKnight = 2,
+        whiteBishop = 3,
+        whiteRook = 4,
+        whiteQueen = 5,
+        whiteKing = 6,
+        blackPawn = -1,
+        blackKnight = -2,
+        blackBishop = -3,
+        blackRook = -4,
+        blackQueen = -5,
+        blackKing = -6
     };
 
-    class chessPiece
+    class ChessBoard
     {
         public:
-            chessPiece(std::pair<int, int> position, gui::pieceType pieceType);
-            std::pair<int, int> getPosition();
-            void updatePosition(std::pair<int, int>);
-            gui::pieceType getPieceType();
-            std::pair<int, int> getPreviousPosition;
+            void initChessBoard();
+            void setupBoardForWhite();
+            void checkForEvent();
+            void renderBoard();
         
-			sf::Texture texture;
-            sf::Sprite sprite;
-            
+            bool isWindowOpen();
             
         private:
-            std::pair<int, int> _position;
-            gui::pieceType _pieceType;
-            std::pair<int, int> _previousPosition;
-            bool _hasMoved;
-            bool _exists;
+            sf::RenderWindow window;
+            sf::Event event;
+        
+            sf::Texture boardTexture;
+            sf::Sprite boardSprite;
     };
-    
-    class chessBoard
-    {
-		public:
-			sf::Texture texture;
-            sf::Sprite sprite;
-		
-		private:
-	};
-
-    bool setupBoard(std::vector<gui::chessPiece> & whitePieces,
-                    std::vector<gui::chessPiece> & blackPieces,
-                    gui::chessBoard & chessBoard);
 
 }
 

@@ -20,6 +20,18 @@
 
 int main(int argc, char const** argv)
 {
+    gui::ChessBoard chessBoardInstance;
+    
+    chessBoardInstance.initChessBoard();
+    chessBoardInstance.setupBoardForWhite();
+    
+    while (chessBoardInstance.isWindowOpen())
+    {
+        chessBoardInstance.checkForEvent();
+        
+        chessBoardInstance.renderBoard();
+    }
+    
     /*// Declarations
     sf::Event event;
     //std::vector<gui::pieceType> guiBoard;
