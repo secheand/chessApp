@@ -42,11 +42,44 @@ namespace gui
             bool isWindowOpen();
             
         private:
+            void _setOriginToMiddle(sf::Sprite & sprite);
+        
             sf::RenderWindow window;
             sf::Event event;
         
             sf::Texture boardTexture;
             sf::Sprite boardSprite;
+        
+            sf::Texture whitePawnsTexture;
+            sf::Texture whiteKnightsTexture;
+            sf::Texture whiteBishopsTexture;
+            sf::Texture whiteRooksTexture;
+            sf::Texture whiteQueenTexture;
+            sf::Texture whiteKingTexture;
+        
+            sf::Texture blackPawnsTexture;
+            sf::Texture blackKnightsTexture;
+            sf::Texture blackBishopsTexture;
+            sf::Texture blackRooksTexture;
+            sf::Texture blackQueenTexture;
+            sf::Texture blackKingTexture;
+        
+            sf::Sprite whitePawnsSprite[8];
+            sf::Sprite whiteKnightsSprite[2];
+            sf::Sprite whiteBishopsSprite[2];
+            sf::Sprite whiteRooksSprite[2];
+            sf::Sprite whiteQueenSprite;
+            sf::Sprite whiteKingSprite;
+        
+            sf::Sprite blackPawnsSprite[8];
+            sf::Sprite blackKnightsSprite[2];
+            sf::Sprite blackBishopsSprite[2];
+            sf::Sprite blackRooksSprite[2];
+            sf::Sprite blackQueenSprite;
+            sf::Sprite blackKingSprite;
+        
+            std::vector<sf::Sprite *> spriteBoard[8][8];
+        
     };
 
 }
