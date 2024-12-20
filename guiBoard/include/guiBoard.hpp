@@ -8,9 +8,6 @@
 #ifndef guiBoard_hpp
 #define guiBoard_hpp
 
-#include <utility>
-#include <string>
-
 #include <SFML/Graphics.hpp>
 
 namespace gui
@@ -78,7 +75,7 @@ namespace gui
             sf::Sprite blackQueenSprite;
             sf::Sprite blackKingSprite;
         
-            std::vector<sf::Sprite *> spriteBoard[8][8];
+            sf::Sprite* spriteBoard[8][8];
         
     };
 

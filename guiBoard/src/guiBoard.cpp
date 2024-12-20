@@ -7,12 +7,21 @@
 
 #include <guiBoard.hpp>
 
+#include <iostream>
+
 void gui::ChessBoard::initChessBoard()
 {
-    boardTexture.loadFromFile("whiteBoard.png");
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            spriteBoard[i][j] = nullptr;
+        }
+    }
+    
+    boardTexture.loadFromFile("Board.png");
     boardSprite.setTexture(boardTexture);
     boardSprite.setPosition(0, 0);
-    boardSprite.setScale(0.69, 0.69);
     
     whitePawnsTexture.loadFromFile("whitePawn.png");
     blackPawnsTexture.loadFromFile("blackPawn.png");
@@ -20,14 +29,13 @@ void gui::ChessBoard::initChessBoard()
     blackKnightsTexture.loadFromFile("blackKnight.png");
     whiteBishopsTexture.loadFromFile("whiteBishop.png");
     blackBishopsTexture.loadFromFile("blackBishop.png");
-    whiteRooksTexture.loadFromFile("whiteRooks.png");
-    blackRooksTexture.loadFromFile("blackRooks.png");
+    whiteRooksTexture.loadFromFile("whiteRook.png");
+    blackRooksTexture.loadFromFile("blackRook.png");
     whiteQueenTexture.loadFromFile("whiteQueen.png");
     blackQueenTexture.loadFromFile("blackQueen.png");
     whiteKingTexture.loadFromFile("whiteKing.png");
     blackKingTexture.loadFromFile("blackKing.png");
     
-    sf::FloatRect pieceRect;
     for (int i = 0; i < 8; i++)
     {
         whitePawnsSprite[i].setTexture(whitePawnsTexture);
@@ -37,12 +45,38 @@ void gui::ChessBoard::initChessBoard()
         _setOriginToMiddle(blackPawnsSprite[i]);
     }
     
-    window.create(sf::VideoMode(807, 806), "ChessApp");
+    for (int i = 0; i < 2; i++)
+    {
+        whiteKnightsSprite[i].setTexture(whiteKnightsTexture);
+        _setOriginToMiddle(whiteKnightsSprite[i]);
+        
+        blackKnightsSprite[i].setTexture(blackKnightsTexture);
+        _setOriginToMiddle(blackKnightsSprite[i]);
+        
+        whiteBishopsSprite[i].setTexture(whiteBishopsTexture);
+        _setOriginToMiddle(whiteBishopsSprite[i]);
+        
+        blackBishopsSprite[i].setTexture(blackBishopsTexture);
+        _setOriginToMiddle(blackBishopsSprite[i]);
+        
+        whiteRooksSprite[i].setTexture(whiteRooksTexture);
+        _setOriginToMiddle(whiteRooksSprite[i]);
+        
+        blackRooksSprite[i].setTexture(blackRooksTexture);
+        _setOriginToMiddle(blackRooksSprite[i]);
+    }
+    
+    window.create(sf::VideoMode(576, 576), "ChessApp");
+    
 }
 
 void gui::ChessBoard::setupBoardForWhite()
 {
-    
+    for (int i = 0; i < 8; i++)
+    {
+        whitePawnsSprite[i].setPosition(36*(i*2+1), 468);
+        spriteBoard[1][i] = &(whitePawnsSprite[i]);
+    }
 }
 
 void gui::ChessBoard::checkForEvent()
@@ -66,6 +100,17 @@ void gui::ChessBoard::checkForEvent()
 void gui::ChessBoard::renderBoard()
 {
     window.draw(boardSprite);
+    
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if(spriteBoard[i][j] != nullptr)
+            {
+                window.draw(*(spriteBoard[i][j]));
+            }
+        }
+    }
     
     // Update the window
     window.display();
