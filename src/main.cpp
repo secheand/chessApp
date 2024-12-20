@@ -23,7 +23,7 @@ int main(int argc, char const** argv)
     gui::ChessBoard chessBoardInstance;
     
     chessBoardInstance.initChessBoard();
-    chessBoardInstance.setupBoardForWhite();
+    chessBoardInstance.setupBoard();
     
     while (chessBoardInstance.isWindowOpen())
     {

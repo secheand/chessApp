@@ -66,17 +66,66 @@ void gui::ChessBoard::initChessBoard()
         _setOriginToMiddle(blackRooksSprite[i]);
     }
     
+    whiteQueenSprite.setTexture(whiteQueenTexture);
+    _setOriginToMiddle(whiteQueenSprite);
+    
+    blackQueenSprite.setTexture(blackQueenTexture);
+    _setOriginToMiddle(blackQueenSprite);
+    
+    whiteKingSprite.setTexture(whiteKingTexture);
+    _setOriginToMiddle(whiteKingSprite);
+    
+    blackKingSprite.setTexture(blackKingTexture);
+    _setOriginToMiddle(blackKingSprite);
+    
     window.create(sf::VideoMode(576, 576), "ChessApp");
     
 }
 
-void gui::ChessBoard::setupBoardForWhite()
+void gui::ChessBoard::setupBoard()
 {
     for (int i = 0; i < 8; i++)
     {
         whitePawnsSprite[i].setPosition(36*(i*2+1), 468);
         spriteBoard[1][i] = &(whitePawnsSprite[i]);
+        
+        blackPawnsSprite[i].setPosition(36*(i*2+1), 108);
+        spriteBoard[6][i] = &(blackPawnsSprite[i]);
     }
+    
+    for (int i = 0; i < 2; i++)
+    {
+        whiteRooksSprite[i].setPosition(36+(i*504), 540);
+        spriteBoard[0][0+7*i] = &(whiteRooksSprite[i]);
+        
+        blackRooksSprite[i].setPosition(36+(i*504), 36);
+        spriteBoard[7][0+7*i] = &(blackRooksSprite[i]);
+        
+        whiteKnightsSprite[i].setPosition(108+(i*360), 540);
+        spriteBoard[0][1+5*i] = &(whiteKnightsSprite[i]);
+        
+        blackKnightsSprite[i].setPosition(108+(i*360), 36);
+        spriteBoard[7][1+5*i] = &(blackKnightsSprite[i]);
+        
+        whiteBishopsSprite[i].setPosition(180+(i*216), 540);
+        spriteBoard[0][2+3*i] = &(whiteBishopsSprite[i]);
+        
+        blackBishopsSprite[i].setPosition(180+(i*216), 36);
+        spriteBoard[7][2+3*i] = &(blackBishopsSprite[i]);
+    }
+    
+    whiteQueenSprite.setPosition(252, 540);
+    spriteBoard[0][3] = &whiteQueenSprite;
+    
+    blackQueenSprite.setPosition(252, 36);
+    spriteBoard[7][3] = &blackQueenSprite;
+    
+    whiteKingSprite.setPosition(324, 540);
+    spriteBoard[0][4] = &whiteKingSprite;
+    
+    blackKingSprite.setPosition(324, 36);
+    spriteBoard[7][4] = &blackKingSprite;
+    
 }
 
 void gui::ChessBoard::checkForEvent()

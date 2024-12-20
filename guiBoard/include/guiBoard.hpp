@@ -32,7 +32,7 @@ namespace gui
     {
         public:
             void initChessBoard();
-            void setupBoardForWhite();
+            void setupBoard();
             void checkForEvent();
             void renderBoard();
         
