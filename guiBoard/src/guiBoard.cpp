@@ -11,22 +11,41 @@
 // Internal libraries
 #include <guiBoard.hpp>
 
-void gui::ChessBoard::initChessBoard()
+void gui::ChessBoard::initChessBoard(std::string playerColor)
 {
     // Sprite board controls which sprites are still on the board and where. At init, all
-    // spaces are set to nullptr (no piece is yet placed)
+    // spaces are set to nullptr (no piece is yet placed). board coordinates are set according to player color.
     for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 8; j++)
         {
             spriteBoard[i][j] = nullptr;
+            
+            // Pixel coordinates of each square change if looking at the board as white or black.
+            // This if statement sets the correct pixel coordinates to the player always looks at the board according to their piece color.
+            if (playerColor == "white")
+            {
+                boardCoordinates[i][j] = sf::Vector2<float>(36+72*j, 540-72*i);
+            }
+            else if(playerColor == "black")
+            {
+                boardCoordinates[i][j] = sf::Vector2<float>(540-72*j, 36+72*i);
+            }
         }
     }
+    
     
     // Load texture for board and set it to sprite
     boardTexture.loadFromFile("Board.png");
     boardSprite.setTexture(boardTexture);
     boardSprite.setPosition(0, 0);
+    // If playing as black, need to rotate board by 180°
+    // position is reset since the rotation happens around bottom left corner
+    if(playerColor == "black")
+    {
+        boardSprite.rotate(180);
+        boardSprite.setPosition(576, 576);
+    }
     
     // Load textures for all pieces
     whitePawnsTexture.loadFromFile("whitePawn.png");
@@ -93,9 +112,10 @@ void gui::ChessBoard::setupBoard()
     // Set positions of pawns on the board.
     for (int i = 0; i < 8; i++)
     {
-        whitePawnsSprite[i].setPosition(36*(i*2+1), 468);
+        //std::cout << boardCoordinates[1][i].x << ", " << boardCoordinates[1][i].y << std::endl;
+        whitePawnsSprite[i].setPosition(boardCoordinates[1][i]);
         spriteBoard[1][i] = &(whitePawnsSprite[i]);
-        blackPawnsSprite[i].setPosition(36*(i*2+1), 108);
+        blackPawnsSprite[i].setPosition(boardCoordinates[6][i]);
         spriteBoard[6][i] = &(blackPawnsSprite[i]);
     }
     
@@ -103,33 +123,33 @@ void gui::ChessBoard::setupBoard()
     for (int i = 0; i < 2; i++)
     {
         // Rooks
-        whiteRooksSprite[i].setPosition(36+(i*504), 540);
+        whiteRooksSprite[i].setPosition(boardCoordinates[0][0+7*i]);
         spriteBoard[0][0+7*i] = &(whiteRooksSprite[i]);
-        blackRooksSprite[i].setPosition(36+(i*504), 36);
+        blackRooksSprite[i].setPosition(boardCoordinates[7][0+7*i]);
         spriteBoard[7][0+7*i] = &(blackRooksSprite[i]);
         
         // Knights
-        whiteKnightsSprite[i].setPosition(108+(i*360), 540);
+        whiteKnightsSprite[i].setPosition(boardCoordinates[0][1+5*i]);
         spriteBoard[0][1+5*i] = &(whiteKnightsSprite[i]);
-        blackKnightsSprite[i].setPosition(108+(i*360), 36);
+        blackKnightsSprite[i].setPosition(boardCoordinates[7][1+5*i]);
         spriteBoard[7][1+5*i] = &(blackKnightsSprite[i]);
         
         // Bishops
-        whiteBishopsSprite[i].setPosition(180+(i*216), 540);
+        whiteBishopsSprite[i].setPosition(boardCoordinates[0][2+3*i]);
         spriteBoard[0][2+3*i] = &(whiteBishopsSprite[i]);
-        blackBishopsSprite[i].setPosition(180+(i*216), 36);
+        blackBishopsSprite[i].setPosition(boardCoordinates[7][2+3*i]);
         spriteBoard[7][2+3*i] = &(blackBishopsSprite[i]);
     }
     
     // Set positions for queens and kings on the board
-    whiteQueenSprite.setPosition(252, 540);
+    whiteQueenSprite.setPosition(boardCoordinates[0][3]);
     spriteBoard[0][3] = &whiteQueenSprite;
-    blackQueenSprite.setPosition(252, 36);
+    blackQueenSprite.setPosition(boardCoordinates[7][3]);
     spriteBoard[7][3] = &blackQueenSprite;
     
-    whiteKingSprite.setPosition(324, 540);
+    whiteKingSprite.setPosition(boardCoordinates[0][4]);
     spriteBoard[0][4] = &whiteKingSprite;
-    blackKingSprite.setPosition(324, 36);
+    blackKingSprite.setPosition(boardCoordinates[7][4]);
     spriteBoard[7][4] = &blackKingSprite;
     
 }

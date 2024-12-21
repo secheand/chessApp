@@ -45,7 +45,7 @@ namespace gui
              * Creates game window.
              *
              */
-            void initChessBoard();
+            void initChessBoard(std::string playerColor);
         
             /**
              @brief Sets the correct initial placement for all sprites on the board
@@ -119,6 +119,7 @@ namespace gui
             sf::Sprite blackKingSprite;
         
             sf::Sprite* spriteBoard[8][8];
+            sf::Vector2<float> boardCoordinates[8][8];
         
     };
 

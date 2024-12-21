@@ -6,6 +6,7 @@
 //
 
 // Standard libraries
+#include <iostream>
 
 // Internal libraries
 #include <guiBoard.hpp>
@@ -20,9 +21,19 @@
  */
 int main(int argc, char const** argv)
 {
+    std::string playerColor;
+    if(argc == 2)
+    {
+        playerColor = argv[1];
+    }
+    else
+    {
+        playerColor = "white";
+    }
+    
     gui::ChessBoard chessBoardInstance;
     
-    chessBoardInstance.initChessBoard();
+    chessBoardInstance.initChessBoard(playerColor);
     chessBoardInstance.setupBoard();
     
     while (chessBoardInstance.isWindowOpen())
