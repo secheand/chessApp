@@ -10,6 +10,6 @@ add_executable(main src/main.cpp)
 add_subdirectory(guiBoard)
 
 target_link_libraries(main
-  PRIVATE
+    PRIVATE
     GuiBoardLibrary
   )
