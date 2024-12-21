@@ -1,10 +1,17 @@
 //
 //  guiBoard.hpp
-//  chessEngine
+//  chessApp
 //
-//  Created by Sebastian Fabian Echeandia Reynes on 23/03/23.
+//  Created by Sebastian Fabian Echeandia Reynes on 19/12/24.
 //
 
+
+/*! @file guiBoard.h
+ *  @brief header file for the guiboard library. Includes definitions for ChessBoard class.
+ *
+ *  The namespace gui is used to make it clear that all these objects interact with the GUI and not the chess engine.
+ *  The ChessBoard class stores and handles all the sprites so the rendered product adequately represents the state of the game.
+ */
 #ifndef guiBoard_hpp
 #define guiBoard_hpp
 
@@ -31,14 +38,50 @@ namespace gui
     class ChessBoard
     {
         public:
+            /**
+             * @brief Initializes internal parameters for the ChessBoard class
+             *
+             * The function fills the sprite board with nullptrs. Loads textures for all pieces and board.
+             * Creates game window.
+             *
+             */
             void initChessBoard();
+        
+            /**
+             @brief Sets the correct initial placement for all sprites on the board
+             *
+             * For each sprite, the function sets the correct initial location. It also asigns each sprite's memory address
+             * to the corresponding square within the sprite board.
+             */
             void setupBoard();
+        
+            /**
+             * @brief Checks if the user has interacted with the app and responds accordingly
+             *
+             * When the user clicks escape key or closes the window, terminate the window object.
+             */
             void checkForEvent();
+        
+            /**
+             * @brief Render board and all pieces in it.
+             *
+             * Clears the window, draws the board and all remaining pieces, and then updates the window.
+             */
             void renderBoard();
         
+            /**
+             * @brief returns the state of the rendered window (closed or opened)
+             *
+             * @return true if window is open, false if it isn't
+             */
             bool isWindowOpen();
             
         private:
+            /**
+             * @brief takes a sprite, find its center and assigns the origin of the sprite to that center
+             *
+             * @param sprite the sprite object whose origin will be updated
+             */
             void _setOriginToMiddle(sf::Sprite & sprite);
         
             sf::RenderWindow window;
