@@ -93,6 +93,7 @@ namespace gui
             void _setOriginToMiddle(sf::Sprite & sprite);
 
             bool isHoldingMouse = false;
+            sf::Vector2i movingPieceOriginalCoordinates;
         
             sf::RenderWindow window;
             sf::Event event;

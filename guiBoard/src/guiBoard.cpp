@@ -171,13 +171,35 @@ void gui::ChessBoard::checkForEvent()
         }
 
         // Check if the user clicked the mouse
-        if (!isHoldingMouse && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        //if (!isHoldingMouse && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+        if(event.type == sf::Event::MouseButtonPressed)
         {
-            isHoldingMouse = true;
+            if (event.mouseButton.button == sf::Mouse::Left)
+            {
+                // Get position of mouse
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                sf::Vector2i coordinates = getSquareCoordinates(mousePosition);
 
-            // Get position of mouse
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-            sf::Vector2i pieceCoordinates = getSquareCoordinates(mousePosition);
+                if (!isHoldingMouse && spriteBoard[coordinates.x][coordinates.y] != nullptr)
+                {
+                    movingPieceOriginalCoordinates = coordinates;
+                    (spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePosition.x, mousePosition.y);
+                }
+                else
+                {
+                    (spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePosition.x, mousePosition.y);
+                }
+            }
+            isHoldingMouse = true;
+        }
+        if (event.type == sf::Event::MouseButtonReleased)
+        {
+            if (event.mouseButton.button == sf::Mouse::Left)
+            {
+                isHoldingMouse = false;
+                (spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(boardCoordinates[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y]);
+            }
+			isHoldingMouse = false;
         }
     }
 }
