@@ -169,6 +169,16 @@ void gui::ChessBoard::checkForEvent()
         {
             window.close();
         }
+
+        // Check if the user clicked the mouse
+        if (!isHoldingMouse && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            isHoldingMouse = true;
+
+            // Get position of mouse
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            sf::Vector2i pieceCoordinates = getSquareCoordinates(mousePosition);
+        }
     }
 }
 
@@ -205,4 +215,13 @@ void gui::ChessBoard::_setOriginToMiddle(sf::Sprite & sprite)
 {
     sf::FloatRect pieceRect = sprite.getLocalBounds();
     sprite.setOrigin(pieceRect.left + pieceRect.width / 2, pieceRect.top +  pieceRect.height / 2);
+}
+
+sf::Vector2i gui::ChessBoard::getSquareCoordinates(sf::Vector2i mousePosition)
+{
+	// Get the coordinates of the square that was clicked
+	int row = (int)(mousePosition.y / 72);
+	int column = (int)(mousePosition.x / 72);
+
+	return sf::Vector2i(row, column);
 }

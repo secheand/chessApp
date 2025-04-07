@@ -75,6 +75,14 @@ namespace gui
              * @return true if window is open, false if it isn't
              */
             bool isWindowOpen();
+
+			/**
+			 * @brief returns the coordinates of the square that was clicked
+			 *
+			 * @param mousePosition the position of the mouse when clicked
+			 * @return a pair of integers representing the row and column of the square clicked
+			 */
+            sf::Vector2i getSquareCoordinates(sf::Vector2i mousePosition);
             
         private:
             /**
@@ -83,6 +91,8 @@ namespace gui
              * @param sprite the sprite object whose origin will be updated
              */
             void _setOriginToMiddle(sf::Sprite & sprite);
+
+            bool isHoldingMouse = false;
         
             sf::RenderWindow window;
             sf::Event event;
