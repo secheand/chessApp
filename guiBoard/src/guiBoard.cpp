@@ -154,7 +154,7 @@ void gui::ChessBoard::setupBoard()
     
 }
 
-void gui::ChessBoard::checkForEvent()
+void gui::ChessBoard::checkForUserInput()
 {
     while (window.pollEvent(event))
     {
@@ -170,37 +170,41 @@ void gui::ChessBoard::checkForEvent()
             window.close();
         }
 
-        // Check if the user clicked the mouse
+        // Check if the user left-clicked the mouse
         if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
         {
-			std::cout << "Mouse clicked" << std::endl;
-
             // Get position of mouse
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-            sf::Vector2i coordinates = getSquareCoordinates(mousePosition);
+            sf::Vector2i coordinates = _getSquareCoordinates(mousePosition);
 
-            std::cout << "Mouse position: " << mousePosition.x << ", " << mousePosition.y << std::endl;
-			std::cout << "Square coordinates: " << coordinates.x << ", " << coordinates.y << std::endl;
-
+			// If the user clicked on a square that has a piece, set the piece to be held and update its position
             if (spriteBoard[coordinates.x][coordinates.y] != nullptr)
             {
                 movingPieceOriginalCoordinates = coordinates;
                 (spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePosition.x, mousePosition.y);
+                isHoldingPiece = true;
             }
-            
-            isHoldingMouse = true;
-        }
-        else if(event.type == sf::Event::MouseButtonReleased)
-        {
-			std::cout << "Mouse released" << std::endl;
-            if (event.mouseButton.button == sf::Mouse::Left)
+            else
             {
-                isHoldingMouse = false;
-                (spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(boardCoordinates[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y]);
+				isHoldingPiece = false;
             }
-			isHoldingMouse = false;
+        }
+        // If the user released the left mouse button, also release the held piece
+        else if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+        {
+            (spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(boardCoordinates[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y]);
+            
+            isHoldingPiece = false;
         }
     }
+
+	// If the user is holding a piece, update its position to follow the mouse
+	if (isHoldingPiece)
+	{
+		// Get position of mouse
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+		(spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePosition.x, mousePosition.y);
+	}
 }
 
 void gui::ChessBoard::renderBoard()
@@ -238,9 +242,9 @@ void gui::ChessBoard::_setOriginToMiddle(sf::Sprite & sprite)
     sprite.setOrigin(pieceRect.left + pieceRect.width / 2, pieceRect.top +  pieceRect.height / 2);
 }
 
-sf::Vector2i gui::ChessBoard::getSquareCoordinates(sf::Vector2i mousePosition)
+sf::Vector2i gui::ChessBoard::_getSquareCoordinates(sf::Vector2i mousePosition)
 {
-	// Get the coordinates of the square that was clicked
+	// Get the coordinates of the square that was clicked. The 7 - row is because the rows are counted bottom up.
 	int row = 7 - (int)(mousePosition.y / 72);
 	int column = (int)(mousePosition.x / 72);
 
