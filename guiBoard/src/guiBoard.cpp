@@ -171,29 +171,28 @@ void gui::ChessBoard::checkForEvent()
         }
 
         // Check if the user clicked the mouse
-        //if (!isHoldingMouse && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-        if(event.type == sf::Event::MouseButtonPressed)
+        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
         {
-            if (event.mouseButton.button == sf::Mouse::Left)
-            {
-                // Get position of mouse
-                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-                sf::Vector2i coordinates = getSquareCoordinates(mousePosition);
+			std::cout << "Mouse clicked" << std::endl;
 
-                if (!isHoldingMouse && spriteBoard[coordinates.x][coordinates.y] != nullptr)
-                {
-                    movingPieceOriginalCoordinates = coordinates;
-                    (spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePosition.x, mousePosition.y);
-                }
-                else
-                {
-                    (spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePosition.x, mousePosition.y);
-                }
+            // Get position of mouse
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            sf::Vector2i coordinates = getSquareCoordinates(mousePosition);
+
+            std::cout << "Mouse position: " << mousePosition.x << ", " << mousePosition.y << std::endl;
+			std::cout << "Square coordinates: " << coordinates.x << ", " << coordinates.y << std::endl;
+
+            if (spriteBoard[coordinates.x][coordinates.y] != nullptr)
+            {
+                movingPieceOriginalCoordinates = coordinates;
+                (spriteBoard[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePosition.x, mousePosition.y);
             }
+            
             isHoldingMouse = true;
         }
-        if (event.type == sf::Event::MouseButtonReleased)
+        else if(event.type == sf::Event::MouseButtonReleased)
         {
+			std::cout << "Mouse released" << std::endl;
             if (event.mouseButton.button == sf::Mouse::Left)
             {
                 isHoldingMouse = false;
@@ -242,7 +241,7 @@ void gui::ChessBoard::_setOriginToMiddle(sf::Sprite & sprite)
 sf::Vector2i gui::ChessBoard::getSquareCoordinates(sf::Vector2i mousePosition)
 {
 	// Get the coordinates of the square that was clicked
-	int row = (int)(mousePosition.y / 72);
+	int row = 7 - (int)(mousePosition.y / 72);
 	int column = (int)(mousePosition.x / 72);
 
 	return sf::Vector2i(row, column);
