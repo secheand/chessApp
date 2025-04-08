@@ -38,7 +38,7 @@ int main(int argc, char const** argv)
     
     while (chessBoardInstance.isWindowOpen())
     {
-        chessBoardInstance.checkForEvent();
+        chessBoardInstance.checkForUserInput();
         
         chessBoardInstance.renderBoard();
     }
