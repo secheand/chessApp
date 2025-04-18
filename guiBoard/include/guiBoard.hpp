@@ -15,29 +15,18 @@
 #ifndef guiBoard_hpp
 #define guiBoard_hpp
 
-#include <SFML/Graphics.hpp>
+#include <pieceManager.hpp>
 
 namespace gui
 {
-    enum pieceType
-    {
-        whitePawn = 1,
-        whiteKnight = 2,
-        whiteBishop = 3,
-        whiteRook = 4,
-        whiteQueen = 5,
-        whiteKing = 6,
-        blackPawn = -1,
-        blackKnight = -2,
-        blackBishop = -3,
-        blackRook = -4,
-        blackQueen = -5,
-        blackKing = -6
-    };
-
     class ChessBoard
     {
         public:
+            // Constructor explícito que inicializa la clase
+            ChessBoard(const std::string& playerColor);
+            // Destructor
+            //~ChessBoard();
+
             /**
              * @brief Initializes internal parameters for the ChessBoard class
              *
@@ -78,13 +67,6 @@ namespace gui
             
         private:
             /**
-             * @brief takes a sprite, find its center and assigns the origin of the sprite to that center
-             *
-             * @param sprite the sprite object whose origin will be updated
-             */
-            void _setOriginToMiddle(sf::Sprite & sprite);
-
-            /**
              * @brief returns the coordinates of the square that was clicked
              *
              * @param mousePosition the position of the mouse when clicked
@@ -101,41 +83,14 @@ namespace gui
             sf::Event event;
 
 			// Objects to store pieces' sprites and their coordinates
-			sf::Sprite* spriteBoard[8][8]; // Holds the sprites of the pieces on the board according to their coordinates on the board
+			chessPiece pieces[32]; // Holds all pieces in the game
+			chessPiece* pieceMap[8][8]; // Holds the pieces on the board according to their square coordinates
 			sf::Vector2<float> boardCoordinates[8][8]; // Holds the pixel coordinates of each square on the board
         
 			////////// Textures and Sprites //////////
             // Board
             sf::Texture boardTexture;
             sf::Sprite boardSprite;
-        
-			// White pieces
-            sf::Texture whitePawnsTexture;
-            sf::Texture whiteKnightsTexture;
-            sf::Texture whiteBishopsTexture;
-            sf::Texture whiteRooksTexture;
-            sf::Texture whiteQueenTexture;
-            sf::Texture whiteKingTexture;
-            sf::Sprite whitePawnsSprite[8];
-            sf::Sprite whiteKnightsSprite[2];
-            sf::Sprite whiteBishopsSprite[2];
-            sf::Sprite whiteRooksSprite[2];
-            sf::Sprite whiteQueenSprite;
-            sf::Sprite whiteKingSprite;
-        
-			// Black pieces
-            sf::Texture blackPawnsTexture;
-            sf::Texture blackKnightsTexture;
-            sf::Texture blackBishopsTexture;
-            sf::Texture blackRooksTexture;
-            sf::Texture blackQueenTexture;
-            sf::Texture blackKingTexture;
-            sf::Sprite blackPawnsSprite[8];
-            sf::Sprite blackKnightsSprite[2];
-            sf::Sprite blackBishopsSprite[2];
-            sf::Sprite blackRooksSprite[2];
-            sf::Sprite blackQueenSprite;
-            sf::Sprite blackKingSprite;
     };
 
 }

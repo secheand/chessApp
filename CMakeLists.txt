@@ -8,8 +8,10 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 add_executable(main src/main.cpp)
 
 add_subdirectory(guiBoard)
+add_subdirectory(pieceManager)
 
 target_link_libraries(main
     PRIVATE
     GuiBoardLibrary
+    PieceManagerLibrary
   )

@@ -39,3 +39,5 @@ Thumbs.db
 # File Paths #
 ##############
 _build/
+out/
+.vs/

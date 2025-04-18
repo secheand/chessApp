@@ -31,9 +31,8 @@ int main(int argc, char const** argv)
         playerColor = "white";
     }
     
-    gui::ChessBoard chessBoardInstance;
+    gui::ChessBoard chessBoardInstance(playerColor);
     
-    chessBoardInstance.initChessBoard(playerColor);
     chessBoardInstance.setupBoard();
     
     while (chessBoardInstance.isWindowOpen())
