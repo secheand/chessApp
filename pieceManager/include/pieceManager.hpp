@@ -39,7 +39,7 @@ enum pieceColor
        public:
 		   chessPiece(); // Default constructor
            chessPiece(pieceType type, pieceColor color, const std::string& texturePath, sf::Vector2<float> initialPosition);
-		   chessPiece(const chessPiece& other); // Copy constructor
+           chessPiece& operator=(const chessPiece& other); // assignment operator
 		   ~chessPiece();
 
            sf::Sprite* getSpriteAddress();

@@ -84,50 +84,50 @@ void ChessBoard::setupBoard()
     {
         // Rooks
 		chessPiece whiteRook(Rook, White, "whiteRook.png", boardCoordinates[0][0 + 7 * i]);
-		pieces[j] = std::move(whiteRook);
+		pieces[j] = whiteRook;
 		pieceMap[0][0 + 7 * i] = &pieces[j];
 		j++;
 		chessPiece blackRook(Rook, Black, "blackRook.png", boardCoordinates[7][0 + 7 * i]);
-		pieces[j] = std::move(blackRook);
+		pieces[j] = blackRook;
 		pieceMap[7][0 + 7 * i] = &pieces[j];
 		j++;
         
         // Knights
 		chessPiece whiteKnight(Knight, White, "whiteKnight.png", boardCoordinates[0][1 + 5 * i]);
-		pieces[j] = std::move(whiteKnight);
+		pieces[j] = whiteKnight;
 		pieceMap[0][1 + 5 * i] = &pieces[j];
 		j++;
 		chessPiece blackKnight(Knight, Black, "blackKnight.png", boardCoordinates[7][1 + 5 * i]);
-		pieces[j] = std::move(blackKnight);
+		pieces[j] = blackKnight;
 		pieceMap[7][1 + 5 * i] = &pieces[j];
 		j++;
         
         // Bishops
 		chessPiece whiteBishop(Bishop, White, "whiteBishop.png", boardCoordinates[0][2 + 3 * i]);
-		pieces[j] = std::move(whiteBishop);
+		pieces[j] = whiteBishop;
 		pieceMap[0][2 + 3 * i] = &pieces[j];
 		j++;
 		chessPiece blackBishop(Bishop, Black, "blackBishop.png", boardCoordinates[7][2 + 3 * i]);
-		pieces[j] = std::move(blackBishop);
+		pieces[j] = blackBishop;
 		pieceMap[7][2 + 3 * i] = &pieces[j];
 		j++;
     }
     
     // Set positions for queens and kings on the board
 	chessPiece whiteQueen(Queen, White, "whiteQueen.png", boardCoordinates[0][3]);
-	pieces[j] = std::move(whiteQueen);
+	pieces[j] = whiteQueen;
 	pieceMap[0][3] = &pieces[j];
 	j++;
 	chessPiece blackQueen(Queen, Black, "blackQueen.png", boardCoordinates[7][3]);
-	pieces[j] = std::move(blackQueen);
+	pieces[j] = blackQueen;
 	pieceMap[7][3] = &pieces[j];
 	j++;
 	chessPiece whiteKing(King, White, "whiteKing.png", boardCoordinates[0][4]);
-	pieces[j] = std::move(whiteKing);
+	pieces[j] = whiteKing;
 	pieceMap[0][4] = &pieces[j];
 	j++;
 	chessPiece blackKing(King, Black, "blackKing.png", boardCoordinates[7][4]);
-	pieces[j] = std::move(blackKing);
+	pieces[j] = blackKing;
 	pieceMap[7][4] = &pieces[j];
 }
 
@@ -201,11 +201,11 @@ void ChessBoard::renderBoard()
         {
             if(pieceMap[i][j] != nullptr)
             {
-                //window.draw(*(pieceMap[i][j]->getSpriteAddress()));
+                window.draw(*(pieceMap[i][j]->getSpriteAddress()));
             }
         }
     }
-    window.draw(*(pieceMap[0][0]->getSpriteAddress()));
+
     // Update the window
     window.display();
 }

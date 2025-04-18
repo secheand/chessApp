@@ -40,23 +40,32 @@ chessPiece::chessPiece(pieceType type, pieceColor color, const std::string& text
 	_sprite.setPosition(_position);
 }
 
-chessPiece::chessPiece(const chessPiece& other)
+chessPiece& chessPiece::operator=(const chessPiece& other)
 {
-	// Copiar los valores primitivos
+	// handle self-assignment
+	if (this == &other)
+	{
+		return *this;
+	}
+
+	// Copy private values
 	_type = other._type;
 	_color = other._color;
 	_position = other._position;
+	_texturePath = other._texturePath;
 
-	// Recargar la textura desde el archivo original
-	if (!_texture.loadFromFile(other._texturePath))
+	// Reload texture
+	if (!_texture.loadFromFile(_texturePath))
 	{
-		std::cerr << "Error loading texture from file: " << other._texturePath << std::endl;
+		std::cerr << "Error loading texture from file: " << _texturePath << std::endl;
 	}
 	_sprite.setTexture(_texture);
 
-	// Copiar las propiedades del sprite
+	// Copy sprite properties
 	_sprite.setOrigin(other._sprite.getOrigin());
 	_sprite.setPosition(_position);
+
+	return *this;
 }
 
 chessPiece::~chessPiece()
