@@ -68,12 +68,12 @@ void ChessBoard::setupBoard()
     // Set positions of pawns on the board.
     for (int i = 0; i < 8; i++)
     {
-        chessPiece whitePawn(Pawn, White, "whitePawn.png", boardCoordinates[1][i]);
+        chessPiece whitePawn(Pawn, White, "whitePawn.png", boardCoordinates[1][i], sf::Vector2i(1, i));
 		pieces[j] = whitePawn;
 		pieceMap[1][i] = &pieces[j];
         j++;
 
-        chessPiece blackPawn(Pawn, White, "blackPawn.png", boardCoordinates[6][i]);
+        chessPiece blackPawn(Pawn, White, "blackPawn.png", boardCoordinates[6][i], sf::Vector2i(6, i));
         pieces[j] = blackPawn;
         pieceMap[6][i] = &pieces[j];
         j++;
@@ -83,50 +83,50 @@ void ChessBoard::setupBoard()
     for (int i = 0; i < 2; i++)
     {
         // Rooks
-		chessPiece whiteRook(Rook, White, "whiteRook.png", boardCoordinates[0][0 + 7 * i]);
+		chessPiece whiteRook(Rook, White, "whiteRook.png", boardCoordinates[0][0 + 7 * i], sf::Vector2i(0, 0 + 7 * i));
 		pieces[j] = whiteRook;
 		pieceMap[0][0 + 7 * i] = &pieces[j];
 		j++;
-		chessPiece blackRook(Rook, Black, "blackRook.png", boardCoordinates[7][0 + 7 * i]);
+		chessPiece blackRook(Rook, Black, "blackRook.png", boardCoordinates[7][0 + 7 * i], sf::Vector2i(7, 0 + 7 * i));
 		pieces[j] = blackRook;
 		pieceMap[7][0 + 7 * i] = &pieces[j];
 		j++;
         
         // Knights
-		chessPiece whiteKnight(Knight, White, "whiteKnight.png", boardCoordinates[0][1 + 5 * i]);
+		chessPiece whiteKnight(Knight, White, "whiteKnight.png", boardCoordinates[0][1 + 5 * i], sf::Vector2i(0, 1 + 5 * i));
 		pieces[j] = whiteKnight;
 		pieceMap[0][1 + 5 * i] = &pieces[j];
 		j++;
-		chessPiece blackKnight(Knight, Black, "blackKnight.png", boardCoordinates[7][1 + 5 * i]);
+		chessPiece blackKnight(Knight, Black, "blackKnight.png", boardCoordinates[7][1 + 5 * i], sf::Vector2i(7, 1 + 5 * i));
 		pieces[j] = blackKnight;
 		pieceMap[7][1 + 5 * i] = &pieces[j];
 		j++;
         
         // Bishops
-		chessPiece whiteBishop(Bishop, White, "whiteBishop.png", boardCoordinates[0][2 + 3 * i]);
+		chessPiece whiteBishop(Bishop, White, "whiteBishop.png", boardCoordinates[0][2 + 3 * i], sf::Vector2i(0, 2 + 3 * i));
 		pieces[j] = whiteBishop;
 		pieceMap[0][2 + 3 * i] = &pieces[j];
 		j++;
-		chessPiece blackBishop(Bishop, Black, "blackBishop.png", boardCoordinates[7][2 + 3 * i]);
+		chessPiece blackBishop(Bishop, Black, "blackBishop.png", boardCoordinates[7][2 + 3 * i], sf::Vector2i(7, 2 + 3 * i));
 		pieces[j] = blackBishop;
 		pieceMap[7][2 + 3 * i] = &pieces[j];
 		j++;
     }
     
     // Set positions for queens and kings on the board
-	chessPiece whiteQueen(Queen, White, "whiteQueen.png", boardCoordinates[0][3]);
+	chessPiece whiteQueen(Queen, White, "whiteQueen.png", boardCoordinates[0][3], sf::Vector2i(0, 3));
 	pieces[j] = whiteQueen;
 	pieceMap[0][3] = &pieces[j];
 	j++;
-	chessPiece blackQueen(Queen, Black, "blackQueen.png", boardCoordinates[7][3]);
+	chessPiece blackQueen(Queen, Black, "blackQueen.png", boardCoordinates[7][3], sf::Vector2i(7, 3));
 	pieces[j] = blackQueen;
 	pieceMap[7][3] = &pieces[j];
 	j++;
-	chessPiece whiteKing(King, White, "whiteKing.png", boardCoordinates[0][4]);
+	chessPiece whiteKing(King, White, "whiteKing.png", boardCoordinates[0][4], sf::Vector2i(0, 4));
 	pieces[j] = whiteKing;
 	pieceMap[0][4] = &pieces[j];
 	j++;
-	chessPiece blackKing(King, Black, "blackKing.png", boardCoordinates[7][4]);
+	chessPiece blackKing(King, Black, "blackKing.png", boardCoordinates[7][4], sf::Vector2i(7, 4));
 	pieces[j] = blackKing;
 	pieceMap[7][4] = &pieces[j];
 }

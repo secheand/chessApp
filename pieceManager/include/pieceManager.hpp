@@ -38,11 +38,13 @@ enum pieceColor
    {
        public:
 		   chessPiece(); // Default constructor
-           chessPiece(pieceType type, pieceColor color, const std::string& texturePath, sf::Vector2<float> initialPosition);
+           chessPiece(pieceType type, pieceColor color, const std::string& texturePath, sf::Vector2<float> initialPosition, sf::Vector2i initialSquarePosition);
            chessPiece& operator=(const chessPiece& other); // assignment operator
 		   ~chessPiece();
 
            sf::Sprite* getSpriteAddress();
+
+		   std::vector<sf::Vector2<float>> getPossibleMoves(chessPiece* pieceMap);
 
            void setPosition(sf::Vector2<float>);
 		   void resetPosition();
@@ -54,7 +56,8 @@ enum pieceColor
 		   bool _hasMoved = false; // Boolean to check if the piece has moved at least once
 		   bool _hasCastled = false; // Boolean to check if the piece has castled at least once
 
-		   sf::Vector2<float> _position; // Pixel Position of the piece on the board
+		   sf::Vector2<float> _pixelPosition; // Pixel Position of the piece on the board
+		   sf::Vector2i _squarePosition; // Square position of the piece on the board
 
            std::string _texturePath;
            sf::Texture _texture;
