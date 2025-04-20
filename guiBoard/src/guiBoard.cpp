@@ -170,7 +170,7 @@ void ChessBoard::checkForUserInput()
             }
        }
        // If the user released the left mouse button, also release the held piece
-       else if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+       else if(isHoldingPiece && event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
        {
            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
            sf::Vector2i coordinates = _getSquareCoordinates(mousePosition);
