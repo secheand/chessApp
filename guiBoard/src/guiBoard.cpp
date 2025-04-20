@@ -160,8 +160,6 @@ void ChessBoard::checkForUserInput()
             {
                 movingPieceOriginalCoordinates = coordinates;
                 (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePositionFloat);
-                std::cout << movingPieceOriginalCoordinates.x << " " << movingPieceOriginalCoordinates.y << std::endl;
-                std::cout << pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y] << std::endl;
                 movingPiecePossibleMoves = (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->getPossibleMoves(pieceMap);
 
                 isHoldingPiece = true;
