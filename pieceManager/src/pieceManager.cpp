@@ -126,7 +126,7 @@ std::vector<sf::Vector2i> chessPiece::getPossibleMoves(chessPiece* pieceMap[8][8
 		{
 			if (_squarePosition.y > 0 && pieceMap[_squarePosition.x][_squarePosition.y - 1] == nullptr)
 			{
-				possibleMoves.push_back(sf::Vector2i(_pixelPosition.x, _pixelPosition.y - 1));
+				possibleMoves.push_back(sf::Vector2i(_squarePosition.x, _squarePosition.y - 1));
 			}
 
 			if (!_hasMoved && pieceMap[_squarePosition.x][_squarePosition.y - 2] == nullptr)
