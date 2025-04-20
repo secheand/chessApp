@@ -68,12 +68,12 @@ void ChessBoard::setupBoard()
     // Set positions of pawns on the board.
     for (int i = 0; i < 8; i++)
     {
-        chessPiece whitePawn(Pawn, White, "whitePawn.png", boardCoordinates[i][1], sf::Vector2i(1, i));
+        chessPiece whitePawn(Pawn, White, "whitePawn.png", boardCoordinates[i][1], sf::Vector2i(i, 1));
 		pieces[j] = whitePawn;
 		pieceMap[i][1] = &pieces[j];
         j++;
 
-        chessPiece blackPawn(Pawn, Black, "blackPawn.png", boardCoordinates[i][6], sf::Vector2i(6, i));
+        chessPiece blackPawn(Pawn, Black, "blackPawn.png", boardCoordinates[i][6], sf::Vector2i(i, 6));
         pieces[j] = blackPawn;
         pieceMap[i][6] = &pieces[j];
         j++;
@@ -83,50 +83,50 @@ void ChessBoard::setupBoard()
     for (int i = 0; i < 2; i++)
     {
         // Rooks
-		chessPiece whiteRook(Rook, White, "whiteRook.png", boardCoordinates[0 + 7 * i][0], sf::Vector2i(0, 0 + 7 * i));
+		chessPiece whiteRook(Rook, White, "whiteRook.png", boardCoordinates[0 + 7 * i][0], sf::Vector2i(0 + 7 * i, 0));
 		pieces[j] = whiteRook;
 		pieceMap[0 + 7 * i][0] = &pieces[j];
 		j++;
-		chessPiece blackRook(Rook, Black, "blackRook.png", boardCoordinates[0 + 7 * i][7], sf::Vector2i(7, 0 + 7 * i));
+		chessPiece blackRook(Rook, Black, "blackRook.png", boardCoordinates[0 + 7 * i][7], sf::Vector2i(0 + 7 * i, 7));
 		pieces[j] = blackRook;
 		pieceMap[0 + 7 * i][7] = &pieces[j];
 		j++;
         
         // Knights
-		chessPiece whiteKnight(Knight, White, "whiteKnight.png", boardCoordinates[1 + 5 * i][0], sf::Vector2i(0, 1 + 5 * i));
+		chessPiece whiteKnight(Knight, White, "whiteKnight.png", boardCoordinates[1 + 5 * i][0], sf::Vector2i(1 + 5 * i, 0));
 		pieces[j] = whiteKnight;
 		pieceMap[1 + 5 * i][0] = &pieces[j];
 		j++;
-		chessPiece blackKnight(Knight, Black, "blackKnight.png", boardCoordinates[1 + 5 * i][7], sf::Vector2i(7, 1 + 5 * i));
+		chessPiece blackKnight(Knight, Black, "blackKnight.png", boardCoordinates[1 + 5 * i][7], sf::Vector2i(1 + 5 * i, 7));
 		pieces[j] = blackKnight;
 		pieceMap[1 + 5 * i][7] = &pieces[j];
 		j++;
         
         // Bishops
-		chessPiece whiteBishop(Bishop, White, "whiteBishop.png", boardCoordinates[2 + 3 * i][0], sf::Vector2i(0, 2 + 3 * i));
+		chessPiece whiteBishop(Bishop, White, "whiteBishop.png", boardCoordinates[2 + 3 * i][0], sf::Vector2i(2 + 3 * i, 0));
 		pieces[j] = whiteBishop;
 		pieceMap[2 + 3 * i][0] = &pieces[j];
 		j++;
-		chessPiece blackBishop(Bishop, Black, "blackBishop.png", boardCoordinates[2 + 3 * i][7], sf::Vector2i(7, 2 + 3 * i));
+		chessPiece blackBishop(Bishop, Black, "blackBishop.png", boardCoordinates[2 + 3 * i][7], sf::Vector2i(2 + 3 * i, 7));
 		pieces[j] = blackBishop;
 		pieceMap[2 + 3 * i][7] = &pieces[j];
 		j++;
     }
 
     // Set positions for queens and kings on the board
-	chessPiece whiteQueen(Queen, White, "whiteQueen.png", boardCoordinates[3][0], sf::Vector2i(0, 3));
+	chessPiece whiteQueen(Queen, White, "whiteQueen.png", boardCoordinates[3][0], sf::Vector2i(3, 0));
 	pieces[j] = whiteQueen;
 	pieceMap[3][0] = &pieces[j];
 	j++;
-	chessPiece blackQueen(Queen, Black, "blackQueen.png", boardCoordinates[3][7], sf::Vector2i(7, 3));
+	chessPiece blackQueen(Queen, Black, "blackQueen.png", boardCoordinates[3][7], sf::Vector2i(3, 7));
 	pieces[j] = blackQueen;
 	pieceMap[3][7] = &pieces[j];
 	j++;
-	chessPiece whiteKing(King, White, "whiteKing.png", boardCoordinates[4][0], sf::Vector2i(0, 4));
+	chessPiece whiteKing(King, White, "whiteKing.png", boardCoordinates[4][0], sf::Vector2i(4, 0));
 	pieces[j] = whiteKing;
 	pieceMap[4][0] = &pieces[j];
 	j++;
-	chessPiece blackKing(King, Black, "blackKing.png", boardCoordinates[4][7], sf::Vector2i(7, 4));
+	chessPiece blackKing(King, Black, "blackKing.png", boardCoordinates[4][7], sf::Vector2i(4, 7));
 	pieces[j] = blackKing;
 	pieceMap[4][7] = &pieces[j];
 }
@@ -160,6 +160,8 @@ void ChessBoard::checkForUserInput()
             {
                 movingPieceOriginalCoordinates = coordinates;
                 (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePositionFloat);
+                std::cout << movingPieceOriginalCoordinates.x << " " << movingPieceOriginalCoordinates.y << std::endl;
+                std::cout << pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y] << std::endl;
                 movingPiecePossibleMoves = (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->getPossibleMoves(pieceMap);
 
                 isHoldingPiece = true;
