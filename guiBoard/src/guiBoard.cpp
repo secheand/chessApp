@@ -178,8 +178,8 @@ void ChessBoard::checkForUserInput()
            if (std::find(movingPiecePossibleMoves.begin(), movingPiecePossibleMoves.end(), coordinates) != movingPiecePossibleMoves.end())
            {
 			   pieceMap[coordinates.x][coordinates.y] = pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y];
-			   pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y] = nullptr;
 			   (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->movePiece(coordinates, boardCoordinates[coordinates.x][coordinates.y]);
+               pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y] = nullptr;
            }
            else
            {
