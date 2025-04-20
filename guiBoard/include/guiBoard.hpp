@@ -77,6 +77,7 @@ namespace gui
             // Parameters for handling pieces based on user input
 			bool isHoldingPiece = false; // Boolean to check if the user is holding a piece
 			sf::Vector2i movingPieceOriginalCoordinates; // Coordinates of the square where the piece was before being moved
+			std::vector<sf::Vector2i> movingPiecePossibleMoves; // Vector of possible moves for the piece being moved
         
             // SFML objects to handle the game window and any interactions with it
             sf::RenderWindow window;

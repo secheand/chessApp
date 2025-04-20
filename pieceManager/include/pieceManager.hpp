@@ -43,9 +43,11 @@ enum pieceColor
 		   ~chessPiece();
 
            sf::Sprite* getSpriteAddress();
+           pieceColor getColor();
 
-		   std::vector<sf::Vector2<float>> getPossibleMoves(chessPiece* pieceMap);
+		   std::vector<sf::Vector2i> getPossibleMoves(chessPiece* pieceMap[8][8]);
 
+		   void movePiece(sf::Vector2i newSquarePosition, sf::Vector2<float> newPixelPosition);
            void setPosition(sf::Vector2<float>);
 		   void resetPosition();
 

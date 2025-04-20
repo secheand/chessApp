@@ -32,11 +32,11 @@ void ChessBoard::initChessBoard(std::string playerColor)
             // This if statement sets the correct pixel coordinates to the player always looks at the board according to their piece color.
             if (playerColor == "white")
             {
-                boardCoordinates[i][j] = sf::Vector2<float>(36+72*j, 540-72*i);
+                boardCoordinates[i][j] = sf::Vector2<float>(36+72*i, 540-72*j);
             }
             else if(playerColor == "black")
             {
-                boardCoordinates[i][j] = sf::Vector2<float>(540-72*j, 36+72*i);
+                boardCoordinates[i][j] = sf::Vector2<float>(540-72*i, 36+72*j);
             }
         }
     }
@@ -63,72 +63,72 @@ void ChessBoard::setupBoard()
 {
     // All pieces in this function are added to the sprite board after their locations are set.
     // The sprite board is the data structure that keeps track of which sprite is on the board and where it is.
-    
+
     int j = 0;
     // Set positions of pawns on the board.
     for (int i = 0; i < 8; i++)
     {
-        chessPiece whitePawn(Pawn, White, "whitePawn.png", boardCoordinates[1][i], sf::Vector2i(1, i));
+        chessPiece whitePawn(Pawn, White, "whitePawn.png", boardCoordinates[i][1], sf::Vector2i(1, i));
 		pieces[j] = whitePawn;
-		pieceMap[1][i] = &pieces[j];
+		pieceMap[i][1] = &pieces[j];
         j++;
 
-        chessPiece blackPawn(Pawn, White, "blackPawn.png", boardCoordinates[6][i], sf::Vector2i(6, i));
+        chessPiece blackPawn(Pawn, Black, "blackPawn.png", boardCoordinates[i][6], sf::Vector2i(6, i));
         pieces[j] = blackPawn;
-        pieceMap[6][i] = &pieces[j];
+        pieceMap[i][6] = &pieces[j];
         j++;
     }
-    
+
     // Set positions of minor pieces on the board
     for (int i = 0; i < 2; i++)
     {
         // Rooks
-		chessPiece whiteRook(Rook, White, "whiteRook.png", boardCoordinates[0][0 + 7 * i], sf::Vector2i(0, 0 + 7 * i));
+		chessPiece whiteRook(Rook, White, "whiteRook.png", boardCoordinates[0 + 7 * i][0], sf::Vector2i(0, 0 + 7 * i));
 		pieces[j] = whiteRook;
-		pieceMap[0][0 + 7 * i] = &pieces[j];
+		pieceMap[0 + 7 * i][0] = &pieces[j];
 		j++;
-		chessPiece blackRook(Rook, Black, "blackRook.png", boardCoordinates[7][0 + 7 * i], sf::Vector2i(7, 0 + 7 * i));
+		chessPiece blackRook(Rook, Black, "blackRook.png", boardCoordinates[0 + 7 * i][7], sf::Vector2i(7, 0 + 7 * i));
 		pieces[j] = blackRook;
-		pieceMap[7][0 + 7 * i] = &pieces[j];
+		pieceMap[0 + 7 * i][7] = &pieces[j];
 		j++;
         
         // Knights
-		chessPiece whiteKnight(Knight, White, "whiteKnight.png", boardCoordinates[0][1 + 5 * i], sf::Vector2i(0, 1 + 5 * i));
+		chessPiece whiteKnight(Knight, White, "whiteKnight.png", boardCoordinates[1 + 5 * i][0], sf::Vector2i(0, 1 + 5 * i));
 		pieces[j] = whiteKnight;
-		pieceMap[0][1 + 5 * i] = &pieces[j];
+		pieceMap[1 + 5 * i][0] = &pieces[j];
 		j++;
-		chessPiece blackKnight(Knight, Black, "blackKnight.png", boardCoordinates[7][1 + 5 * i], sf::Vector2i(7, 1 + 5 * i));
+		chessPiece blackKnight(Knight, Black, "blackKnight.png", boardCoordinates[1 + 5 * i][7], sf::Vector2i(7, 1 + 5 * i));
 		pieces[j] = blackKnight;
-		pieceMap[7][1 + 5 * i] = &pieces[j];
+		pieceMap[1 + 5 * i][7] = &pieces[j];
 		j++;
         
         // Bishops
-		chessPiece whiteBishop(Bishop, White, "whiteBishop.png", boardCoordinates[0][2 + 3 * i], sf::Vector2i(0, 2 + 3 * i));
+		chessPiece whiteBishop(Bishop, White, "whiteBishop.png", boardCoordinates[2 + 3 * i][0], sf::Vector2i(0, 2 + 3 * i));
 		pieces[j] = whiteBishop;
-		pieceMap[0][2 + 3 * i] = &pieces[j];
+		pieceMap[2 + 3 * i][0] = &pieces[j];
 		j++;
-		chessPiece blackBishop(Bishop, Black, "blackBishop.png", boardCoordinates[7][2 + 3 * i], sf::Vector2i(7, 2 + 3 * i));
+		chessPiece blackBishop(Bishop, Black, "blackBishop.png", boardCoordinates[2 + 3 * i][7], sf::Vector2i(7, 2 + 3 * i));
 		pieces[j] = blackBishop;
-		pieceMap[7][2 + 3 * i] = &pieces[j];
+		pieceMap[2 + 3 * i][7] = &pieces[j];
 		j++;
     }
-    
+
     // Set positions for queens and kings on the board
-	chessPiece whiteQueen(Queen, White, "whiteQueen.png", boardCoordinates[0][3], sf::Vector2i(0, 3));
+	chessPiece whiteQueen(Queen, White, "whiteQueen.png", boardCoordinates[3][0], sf::Vector2i(0, 3));
 	pieces[j] = whiteQueen;
-	pieceMap[0][3] = &pieces[j];
+	pieceMap[3][0] = &pieces[j];
 	j++;
-	chessPiece blackQueen(Queen, Black, "blackQueen.png", boardCoordinates[7][3], sf::Vector2i(7, 3));
+	chessPiece blackQueen(Queen, Black, "blackQueen.png", boardCoordinates[3][7], sf::Vector2i(7, 3));
 	pieces[j] = blackQueen;
-	pieceMap[7][3] = &pieces[j];
+	pieceMap[3][7] = &pieces[j];
 	j++;
-	chessPiece whiteKing(King, White, "whiteKing.png", boardCoordinates[0][4], sf::Vector2i(0, 4));
+	chessPiece whiteKing(King, White, "whiteKing.png", boardCoordinates[4][0], sf::Vector2i(0, 4));
 	pieces[j] = whiteKing;
-	pieceMap[0][4] = &pieces[j];
+	pieceMap[4][0] = &pieces[j];
 	j++;
-	chessPiece blackKing(King, Black, "blackKing.png", boardCoordinates[7][4], sf::Vector2i(7, 4));
+	chessPiece blackKing(King, Black, "blackKing.png", boardCoordinates[4][7], sf::Vector2i(7, 4));
 	pieces[j] = blackKing;
-	pieceMap[7][4] = &pieces[j];
+	pieceMap[4][7] = &pieces[j];
 }
 
 void ChessBoard::checkForUserInput()
@@ -150,27 +150,41 @@ void ChessBoard::checkForUserInput()
        // Check if the user left-clicked the mouse
        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
        {
-           // Get position of mouse
-           sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-           sf::Vector2<float> mousePositionFloat(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
-           sf::Vector2i coordinates = _getSquareCoordinates(mousePosition);
+            // Get position of mouse
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            sf::Vector2<float> mousePositionFloat(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+            sf::Vector2i coordinates = _getSquareCoordinates(mousePosition);
 
-		// If the user clicked on a square that has a piece, set the piece to be held and update its position
-           if (pieceMap[coordinates.x][coordinates.y] != nullptr)
-           {
-               movingPieceOriginalCoordinates = coordinates;
-               (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePositionFloat);
-               isHoldingPiece = true;
-           }
-           else
-           {
-			isHoldingPiece = false;
-           }
+		    // If the user clicked on a square that has a piece, set the piece to be held and update its position
+            if (pieceMap[coordinates.x][coordinates.y] != nullptr)
+            {
+                movingPieceOriginalCoordinates = coordinates;
+                (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(mousePositionFloat);
+                movingPiecePossibleMoves = (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->getPossibleMoves(pieceMap);
+
+                isHoldingPiece = true;
+            }
+            else
+            {
+                isHoldingPiece = false;
+            }
        }
        // If the user released the left mouse button, also release the held piece
        else if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
        {
-           (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->setPosition(boardCoordinates[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y]);
+           sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+           sf::Vector2i coordinates = _getSquareCoordinates(mousePosition);
+
+           if (std::find(movingPiecePossibleMoves.begin(), movingPiecePossibleMoves.end(), coordinates) != movingPiecePossibleMoves.end())
+           {
+			   pieceMap[coordinates.x][coordinates.y] = pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y];
+			   pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y] = nullptr;
+			   (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->movePiece(coordinates, boardCoordinates[coordinates.x][coordinates.y]);
+           }
+           else
+           {
+               (pieceMap[movingPieceOriginalCoordinates.x][movingPieceOriginalCoordinates.y])->resetPosition();
+           }
            
            isHoldingPiece = false;
        }
@@ -221,5 +235,5 @@ sf::Vector2i ChessBoard::_getSquareCoordinates(sf::Vector2i mousePosition)
 	int row = 7 - (int)(mousePosition.y / 72);
 	int column = (int)(mousePosition.x / 72);
 
-	return sf::Vector2i(row, column);
+	return sf::Vector2i(column, row);
 }

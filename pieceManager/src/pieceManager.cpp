@@ -90,17 +90,62 @@ void chessPiece::resetPosition()
 	_sprite.setPosition(_pixelPosition);
 }
 
-std::vector<sf::Vector2<float>> chessPiece::getPossibleMoves(chessPiece* pieceMap)
+std::vector<sf::Vector2i> chessPiece::getPossibleMoves(chessPiece* pieceMap[8][8])
 {
 	// This function will return a vector of possible moves for the piece
-	std::vector<sf::Vector2<float>> possibleMoves;
+	std::vector<sf::Vector2i> possibleMoves;
 
 	// Check the type of piece and calculate possible moves accordingly
 	switch (_type)
 	{
 	case Pawn:
-		
+	{
+		if (_color == White)
+		{
+			if (_squarePosition.y < 7 && pieceMap[_squarePosition.x][_squarePosition.y + 1] == nullptr)
+			{
+				possibleMoves.push_back(sf::Vector2i(_pixelPosition.x, _pixelPosition.y + 1));
+			}
+
+			if (!_hasMoved && pieceMap[_squarePosition.x][_squarePosition.y + 2] == nullptr)
+			{
+				possibleMoves.push_back(sf::Vector2i(_squarePosition.x, _squarePosition.y + 2));
+			}
+
+			if (_squarePosition.x > 0 && _squarePosition.y < 7 && pieceMap[_squarePosition.x - 1][_squarePosition.y + 1] != nullptr && _color != pieceMap[_squarePosition.x - 1][_squarePosition.y + 1]->getColor())
+			{
+				possibleMoves.push_back(sf::Vector2i(_squarePosition.x - 1, _squarePosition.y + 1));
+			}
+
+			if (_squarePosition.x < 7 && _squarePosition.y < 7 && pieceMap[_squarePosition.x + 1][_squarePosition.y + 1] != nullptr && _color != pieceMap[_squarePosition.x + 1][_squarePosition.y + 1]->getColor())
+			{
+				possibleMoves.push_back(sf::Vector2i(_squarePosition.x + 1, _squarePosition.y + 1));
+			}
+		}
+		else if (_color == Black)
+		{
+			if (_squarePosition.y > 0 && pieceMap[_squarePosition.x][_squarePosition.y - 1] == nullptr)
+			{
+				possibleMoves.push_back(sf::Vector2i(_pixelPosition.x, _pixelPosition.y - 1));
+			}
+
+			if (!_hasMoved && pieceMap[_squarePosition.x][_squarePosition.y - 2] == nullptr)
+			{
+				possibleMoves.push_back(sf::Vector2i(_squarePosition.x, _squarePosition.y - 2));
+			}
+
+			if (_squarePosition.x > 0 && _squarePosition.y > 0 && pieceMap[_squarePosition.x - 1][_squarePosition.y - 1] != nullptr && _color != pieceMap[_squarePosition.x - 1][_squarePosition.y - 1]->getColor())
+			{
+				possibleMoves.push_back(sf::Vector2i(_squarePosition.x - 1, _squarePosition.y - 1));
+			}
+
+			if (_squarePosition.x < 7 && _squarePosition.y > 0 && pieceMap[_squarePosition.x + 1][_squarePosition.y - 1] != nullptr && _color != pieceMap[_squarePosition.x + 1][_squarePosition.y - 1]->getColor())
+			{
+				possibleMoves.push_back(sf::Vector2i(_squarePosition.x + 1, _squarePosition.y - 1));
+			}
+		}
 		break;
+	}
 	case Knight:
 		// Add logic for knight moves
 		break;
@@ -120,4 +165,17 @@ std::vector<sf::Vector2<float>> chessPiece::getPossibleMoves(chessPiece* pieceMa
 		break;
 	}
 	return possibleMoves;
+}
+
+pieceColor chessPiece::getColor()
+{
+	return _color;
+}
+
+void chessPiece::movePiece(sf::Vector2i newSquarePosition, sf::Vector2<float> newPixelPosition)
+{
+	_squarePosition = newSquarePosition;
+	_pixelPosition = newPixelPosition;
+	_sprite.setPosition(_pixelPosition);
+	_hasMoved = true;
 }
